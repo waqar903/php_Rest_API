@@ -125,7 +125,56 @@ function clearResponse(){
     $('#response').html('');
 }
  
-// showLoginPage() will be here
+// show login form
+$(document).on('click', '#login', function(){
+    showLoginPage();
+});
+ 
+// show login page
+function showLoginPage(){
+ 
+ // remove jwt
+ setCookie("jwt", "", 1);
+
+ // login page html
+ var html = `
+     <h2>Login</h2>
+     <form id='login_form'>
+         <div class='form-group'>
+             <label for='email'>Email address</label>
+             <input type='email' class='form-control' id='email' name='email' placeholder='Enter email'>
+         </div>
+
+         <div class='form-group'>
+             <label for='password'>Password</label>
+             <input type='password' class='form-control' id='password' name='password' placeholder='Password'>
+         </div>
+
+         <button type='submit' class='btn btn-primary'>Login</button>
+     </form>
+     `;
+
+ $('#content').html(html);
+ clearResponse();
+ showLoggedOutMenu();
+}
+
+// function to set cookie
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+// if the user is logged out
+function showLoggedOutMenu(){
+    // show login and sign up from navbar & hide logout button
+    $("#login, #sign_up").show();
+    $("#logout").hide();
+}
+ 
+// showHomePage() function will be here
  
 // function to make form values to json format
 $.fn.serializeObject = function(){
