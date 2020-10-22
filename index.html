@@ -156,7 +156,13 @@ $.ajax({
  return false;
 });
 
-// trigger to show home page will be here
+// show home page
+$(document).on('click', '#home', function(){
+    showHomePage();
+    clearResponse();
+});
+ 
+// trigger to show account form will be here
      
         // remove any prompt messages
 function clearResponse(){
@@ -229,7 +235,11 @@ $('#content').html(html);
 showLoggedInMenu();
  })
 
- // show login page on error will be here
+ // show login page on error
+.fail(function(result){
+    showLoginPage();
+    $('#response').html("<div class='alert alert-danger'>Please login to access the home page.</div>");
+});
 }
 
 // get or read cookie
@@ -250,7 +260,14 @@ function getCookie(cname){
     return "";
 }
 
-// showLoggedInMenu() will be here
+// if the user is logged in
+function showLoggedInMenu(){
+    // hide login and sign up from navbar & show logout button
+    $("#login, #sign_up").hide();
+    $("#logout").show();
+}
+ 
+// showUpdateAccountForm() will be here
  
 // function to make form values to json format
 $.fn.serializeObject = function(){
