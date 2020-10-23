@@ -50,4 +50,3 @@ else{
     // display message: unable to create user
     echo json_encode(array("message" => "Unable to create user."));
 }
-?>
